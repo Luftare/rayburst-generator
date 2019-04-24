@@ -1,0 +1,52 @@
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    display: inline-block;
+    background: grey;
+  }
+
+  label {
+    margin-right: 12px;
+  }
+</style>
+<canvas></canvas>
+<div class="controls">
+  <h3>Size: <span id="image-width">0</span>px, <span id="image-height">0</span>px,</h3>
+  <div>
+    <h4>Rays</h4>
+    <label>Count</label>
+    <input type="range" id="ray-count" min="4" max="200" step="2" value="10"><br>
+    <label>Color 1</label>
+    <input type="color" id="ray-color-even"><br>
+    <label>Color 2</label>
+    <input type="color" id="ray-color-odd">
+  </div>
+  <div>
+    <h4>Center</h4>
+    <label>Color</label>
+    <input type="color" id="center-color"><br>
+    <label>Core radius</label>
+    <input type="range" id="center-core-radius" min="0" max="600" value="20"><br>
+    <label>Shade radius</label>
+    <input type="range" id="center-shade-radius" min="0" max="1600" value="100">
+  </div>
+  <h4>File</h4>
+  <input type="text" id="file-name" value="rayburst" > <b>.png</b><br>
+  <a href="#" id="download" download="rayburst.png">Download</a>
+</div>
+<script src="main.js"></script>
