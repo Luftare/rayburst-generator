@@ -1,7 +1,33 @@
 <style>
   body {
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
+  }
+
+  h4 {
+    margin-top: 12px;
+    margin-bottom: 8px;
+  }
+
+  label {
+    display: block;
+    margin-top: 6px;
+    margin-bottom: 4px;
+  }
+
+  input[type="number"] {
+    margin-top: 12px;
+    width: 50px;
+  }
+
+  input[type="text"] {
+    margin-top: 12px;
+    width: 100px;
+  }
+
+  input[type="range"] {
+    width: 100%;
   }
 
   #preview {
@@ -24,7 +50,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 8px;
+    padding: 24px;
     display: inline-block;
     background: grey;
   }
@@ -55,7 +81,6 @@
     <input type="range" id="center-shade-radius" min="0" max="2.0" value="0.5" step="0.001">
   </div>
   <h4>File</h4>
-  <div>Size: </div>
   <input type="number" id="image-width" min="2" max="9000" value="600">px * <input type="number" id="image-height" min="2" max="9000" value="600">px<br>
   <input type="text" id="file-name" value="rayburst" > <b>.png</b><br><br>
   <a href="#" id="download" download="rayburst.png">Download</a>
