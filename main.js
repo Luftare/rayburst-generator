@@ -8,7 +8,7 @@ window.addEventListener('resize', () => {
 
 let state = {
   rayCount: 10,
-  rayColorEven: '#000000',
+  rayColorEven: '#000066',
   rayColorOdd: '#444444',
   centerCoreRadius: 0.01,
   centerShadeRadius: 0.5,
@@ -26,23 +26,27 @@ function loadPersistedState() {
 
   if(stateJSON) {
     state = JSON.parse(stateJSON);
-
-    document.getElementById('ray-count').value = state.rayCount;
-    document.getElementById('center-core-radius').value = state.centerCoreRadius;
-    document.getElementById('center-shade-radius').value = state.centerShadeRadius;
-    document.getElementById('ray-color-even').value = state.rayColorEven;
-    document.getElementById('ray-color-odd').value = state.rayColorOdd;
-    document.getElementById('center-color').value = state.centerColor;
-    document.getElementById('file-name').value = state.fileName;
-    document.getElementById('image-width').value = state.imageWidth;
-    document.getElementById('image-height').value = state.imageHeight;
   }
+
+  propagateStateToDOM();
 }
 
 function persistState() {
   if(!window.localStorage) return;
   const stateJSON = JSON.stringify(state);
   localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, stateJSON);
+}
+
+function propagateStateToDOM() {
+  document.getElementById('ray-count').value = state.rayCount;
+  document.getElementById('center-core-radius').value = state.centerCoreRadius;
+  document.getElementById('center-shade-radius').value = state.centerShadeRadius;
+  document.getElementById('ray-color-even').value = state.rayColorEven;
+  document.getElementById('ray-color-odd').value = state.rayColorOdd;
+  document.getElementById('center-color').value = state.centerColor;
+  document.getElementById('file-name').value = state.fileName;
+  document.getElementById('image-width').value = state.imageWidth;
+  document.getElementById('image-height').value = state.imageHeight;
 }
 
 document.getElementById('ray-count').addEventListener('input', (e) => {
