@@ -4,11 +4,20 @@
     padding: 0;
   }
 
-  canvas {
+  #preview {
     position: absolute;
     top: 0;
     left: 0;
     z-index: -1;
+  }
+
+  #production {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background:pink;
+    display: none;
   }
 
   .controls {
@@ -24,9 +33,9 @@
     margin-right: 12px;
   }
 </style>
-<canvas></canvas>
+<canvas id="preview"></canvas>
+<canvas id="production"></canvas>
 <div class="controls">
-  <h3>Size: <span id="image-width">0</span>px, <span id="image-height">0</span>px,</h3>
   <div>
     <h4>Rays</h4>
     <label>Count</label>
@@ -41,12 +50,14 @@
     <label>Color</label>
     <input type="color" id="center-color"><br>
     <label>Core radius</label>
-    <input type="range" id="center-core-radius" min="0" max="600" value="20"><br>
+    <input type="range" id="center-core-radius" min="0" max="2.0" value="0.01" step="0.001"><br>
     <label>Shade radius</label>
-    <input type="range" id="center-shade-radius" min="0" max="1600" value="100">
+    <input type="range" id="center-shade-radius" min="0" max="2.0" value="0.5" step="0.001">
   </div>
   <h4>File</h4>
-  <input type="text" id="file-name" value="rayburst" > <b>.png</b><br>
+  <div>Size: </div>
+  <input type="number" id="image-width" min="2" max="9000" value="600">px * <input type="number" id="image-height" min="2" max="9000" value="600">px<br>
+  <input type="text" id="file-name" value="rayburst" > <b>.png</b><br><br>
   <a href="#" id="download" download="rayburst.png">Download</a>
 </div>
 <script src="main.js"></script>
