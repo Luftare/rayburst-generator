@@ -6,58 +6,94 @@ window.addEventListener('resize', () => {
   paint(previewCanvas);
 });
 
-const state = {
+let state = {
   rayCount: 10,
-  rayColorEven: 'black',
-  rayColorOdd: 'grey',
+  rayColorEven: '#000000',
+  rayColorOdd: '#444444',
   centerCoreRadius: 0.01,
   centerShadeRadius: 0.5,
-  centerColor: 'white',
+  centerColor: '#ffffff',
   fileName: 'rayburst',
   imageWidth: 600,
   imageHeight: 600
 };
 
+const LOCAL_STORAGE_ITEM_NAME = 'rayburst-generator-persisted-state';
+
+function loadPersistedState() {
+  if(!window.localStorage) return;
+  const stateJSON = localStorage.getItem(LOCAL_STORAGE_ITEM_NAME);
+
+  if(stateJSON) {
+    state = JSON.parse(stateJSON);
+
+    document.getElementById('ray-count').value = state.rayCount;
+    document.getElementById('center-core-radius').value = state.centerCoreRadius;
+    document.getElementById('center-shade-radius').value = state.centerShadeRadius;
+    document.getElementById('ray-color-even').value = state.rayColorEven;
+    document.getElementById('ray-color-odd').value = state.rayColorOdd;
+    document.getElementById('center-color').value = state.centerColor;
+    document.getElementById('file-name').value = state.fileName;
+    document.getElementById('image-width').value = state.imageWidth;
+    document.getElementById('image-height').value = state.imageHeight;
+  }
+}
+
+function persistState() {
+  if(!window.localStorage) return;
+  const stateJSON = JSON.stringify(state);
+  localStorage.setItem(LOCAL_STORAGE_ITEM_NAME, stateJSON);
+}
+
 document.getElementById('ray-count').addEventListener('input', (e) => {
   state.rayCount = parseInt(e.target.value);
   paint(previewCanvas);
+  persistState();
 });
 
 document.getElementById('center-core-radius').addEventListener('input', (e) => {
   state.centerCoreRadius = parseFloat(e.target.value);
   paint(previewCanvas);
+  persistState();
 });
 
 document.getElementById('center-shade-radius').addEventListener('input', (e) => {
   state.centerShadeRadius = parseFloat(e.target.value);
   paint(previewCanvas);
+  persistState();
 });
 
 document.getElementById('ray-color-even').addEventListener('change', (e) => {
   state.rayColorEven = e.target.value;
   paint(previewCanvas);
+  persistState();
 });
 
 document.getElementById('ray-color-odd').addEventListener('change', (e) => {
   state.rayColorOdd = e.target.value;
   paint(previewCanvas);
+  persistState();
 });
 
 document.getElementById('center-color').addEventListener('change', (e) => {
   state.centerColor = e.target.value;
   paint(previewCanvas);
+  persistState();
 });
 
 document.getElementById('file-name').addEventListener('input', (e) => {
   state.fileName = e.target.value;
+  persistState();
 });
 
 document.getElementById('image-width').addEventListener('input', (e) => {
   state.imageWidth = parseInt(e.target.value);
+  persistState();
 });
 
 document.getElementById('image-height').addEventListener('input', (e) => {
   state.imageHeight = parseInt(e.target.value);
+  persistState();
 });
 
 document.getElementById('download').addEventListener('click', (e) => {
@@ -124,6 +160,7 @@ function handleScreenSize() {
 
 function boot() {
   handleScreenSize();
+  loadPersistedState();
   paint(previewCanvas);
 }
 
